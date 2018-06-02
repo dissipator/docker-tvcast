@@ -39,7 +39,7 @@ class Device(object):
 
 
     def seek_video(self, mins):
-        seconds = mins * 60
+        seconds = (int(mins) * int(60))
         mc = self.get_media_controller()
         mc.seek(seconds)
 
