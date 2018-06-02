@@ -1,4 +1,5 @@
 import pychromecast
+import random
 
 #device_name = "XBR-55X850D"
 #cached_mc = {} 
@@ -15,13 +16,30 @@ def title_map():
         "seven": "しゃべくり007",
         "gym": "炎の体育会TV",
         "class": "世界一受けたい授業",
-        "look": "世界まる見えテレビ特捜部"
+        "look": "世界まる見えテレビ特捜部",
+        "law": "行列のできる法律相談所",
+        "deep": "深イイ話",
+        "karaoke": "THEカラオケ★バトル",
+        "music": "ミュージックステーション",
+        "akb": "AKBINGO",
+        "gold": "金スマ",
+        "london": "ロンドンハーツ",
+        "monitor": "モニタリング"
     }
+
 
 def get_tv_title(tv_title):
     title_maps = dict(title_map())
     if tv_title in title_maps:
         return title_maps[tv_title]
+
+
+def get_random_tv_title():
+    title_maps = dict(title_map())
+    title = random.choice(title_maps.values())
+    # store title to temp file
+    # {}
+    return title
 
 
 #def get_media_controller(device_name):

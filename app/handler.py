@@ -27,7 +27,10 @@ def apple():
 # /jp/tv_show/really
 @app.route('/tv/jp/<title>')
 def tv_jp__show(title):
-    tv_title = service.get_tv_title(title)
+    if title == 'random':
+        tv_title = service.get_random_tv_title()
+    else:
+        tv_title = service.get_tv_title(title)
     video_url = jp_video.parse_video_url(tv_title)
     device.play_video(video_url)
     return '{"status":"ok", "tv_title":tv_title}'
@@ -55,6 +58,12 @@ def resume_tv():
 def seek_tv(mins):
     device.seek_video(mins)
     return '{"status":"ok", "msg":"video resumed"}'
+
+
+@app.route('/tv/list')
+def seek_tv(mins):
+    title_list = service.title_map()
+    return json.dumps(title_list)
 
 
 # use by direct execute 

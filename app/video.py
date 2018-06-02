@@ -57,6 +57,8 @@ class Video(object):
             #'//a[contains(text(),"@provider@")]/@href',
             # 4 video mp4
             "//div[contains(@id, 'video-content')]//video/@src"
+            # pandora
+            #"//video[contains(@id, 'qVideo')]/@src"
         ]
-        providers = ["9TSU"]
+        providers = ["9TSU", "PAN"]
         return self(site, xpaths, providers) 
