@@ -61,7 +61,7 @@ def seek_tv(mins):
 
 
 @app.route('/tv/list')
-def seek_tv(mins):
+def list_tv(mins):
     title_list = service.title_map()
     return json.dumps(title_list)
 
