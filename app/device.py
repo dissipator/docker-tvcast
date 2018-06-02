@@ -38,11 +38,12 @@ class Device(object):
         mc.play()
 
 
-    def seek_video(self, seconds):
+    def seek_video(self, mins):
+        seconds = mins * 60
         mc = self.get_media_controller()
         mc.seek(seconds)
 
 
-    def skip_video(self, seconds):
+    def skip_video(self):
         mc = self.get_media_controller()
-        mc.skip(seconds)
+        mc.skip()

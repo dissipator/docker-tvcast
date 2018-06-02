@@ -51,9 +51,9 @@ def resume_tv():
     return '{"status":"ok", "msg":"video resumed"}'
 
 
-@app.route('/tv/seek/<seconds>')
-def seek_tv(seconds):
-    device.resume_seek(seconds)
+@app.route('/tv/seek/<mins>')
+def seek_tv(mins):
+    device.seek_video(mins)
     return '{"status":"ok", "msg":"video resumed"}'
 
 

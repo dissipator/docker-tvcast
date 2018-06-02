@@ -10,7 +10,12 @@ import pychromecast
 
 def title_map():
     return {
-        "really": "ホンマでっか!?ＴＶ"
+        "really": "ホンマでっか!?ＴＶ",
+        "going": "イッテＱ",
+        "seven": "しゃべくり007",
+        "gym": "炎の体育会TV",
+        "class": "世界一受けたい授業",
+        "look": "世界まる見えテレビ特捜部"
     }
 
 def get_tv_title(tv_title):

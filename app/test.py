@@ -11,11 +11,16 @@ device = Device(device_name)
 
 def jp_tv_show(title):
     tv_title = service.get_tv_title(title)
+    pdb.set_trace()
     jp_video = Video.get_jp_video()
     video_url = jp_video.parse_video_url(tv_title)
-    device.play_video(video_url)
+    #pdb.set_trace()
+    #device.play_video(video_url)
     #device.stop_video()
 
     #service.play_video(video_url, device_name)
 
+#jp_tv_show('seven')
 jp_tv_show('really')
+
+#device.seek_video(1000)

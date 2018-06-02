@@ -54,6 +54,7 @@ class Video(object):
             "//div[contains(@class,'ently_outline')]//div[contains(@class, 'readmore')]//a[contains(@onclick,'showMore')]/@href",
             # 3 video provider
             '//a[text()="@provider@"]/@href',
+            #'//a[contains(text(),"@provider@")]/@href',
             # 4 video mp4
             "//div[contains(@id, 'video-content')]//video/@src"
         ]
