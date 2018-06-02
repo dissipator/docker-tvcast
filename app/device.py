@@ -7,12 +7,13 @@ class Device(object):
     def __init__(self, device_name = "XBR-55X850D"):
         self.cached_mc = None 
         self.device_name = device_name
-        self.chromecasts = pychromecast.get_chromecasts()
+        #self.chromecasts = pychromecast.get_chromecasts()
         #self.device_list = [cc.device.friendly_name for cc in self.chromecasts]
 
 
     def get_media_controller(self):
         if not self.cached_mc:
+            self.chromecasts = pychromecast.get_chromecasts()
             cast = next(cc for cc in self.chromecasts if cc.device.friendly_name == self.device_name)
             self.cached_mc = cast.media_controller
         return self.cached_mc
