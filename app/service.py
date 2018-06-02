@@ -36,7 +36,7 @@ def get_tv_title(tv_title):
 
 def get_random_tv_title():
     title_maps = dict(title_map())
-    title = random.choice(title_maps.values())
+    title = random.choice(list(title_maps.values()))
     # store title to temp file
     # {}
     return title
