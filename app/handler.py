@@ -30,7 +30,7 @@ def tv_jp__show(title):
     if title == 'random':
         tv_title = service.get_random_tv_title()
     else:
-        tv_title = service.get_tv_title(title)
+        tv_title = service.get_tv_title(title.lower())
     video_url = jp_video.parse_video_url(tv_title)
     device.play_video(video_url)
     return '{"status":"ok", "tv_title":tv_title}'
