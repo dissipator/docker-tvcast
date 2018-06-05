@@ -24,7 +24,7 @@ def title_map():
         "bingo": "AKBINGO",
         "gold": "金スマ",
         "london": "ロンドンハーツ",
-        "monitor": "モニタリング"
+        "monitoring": "モニタリング"
     }
 
 
