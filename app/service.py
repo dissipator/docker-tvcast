@@ -27,7 +27,7 @@ def title_map():
         "monitoring": "モニタリング",
         "news": "ザ!世界仰天ニュース",
         "seminar": "有吉ゼミ",
-        "poor": "幸せ!ボンビーガール",
+        "girl": "幸せ!ボンビーガール",
         "tonight": "今夜くらべてみました"
     }
 
