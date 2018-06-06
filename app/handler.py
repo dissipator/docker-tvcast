@@ -10,7 +10,7 @@ application = app
 
 device_name = "XBR-55X850D"
 device = Device(device_name)
-jp_video = Video.get_jp_video()
+jp_video = Video.get_waraimasu()
 
 
 @app.route('/')

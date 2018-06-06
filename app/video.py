@@ -14,6 +14,7 @@ class Video(object):
     def parse_video_url(self, title):
         idx = 0
         xpaths_copy = list(self.xpaths)
+        site_copy = self.site.replace("@title@", title)
         self.replace_title(xpaths_copy, title)
         self.replace_provider(xpaths_copy, self.providers[idx])
 
@@ -22,7 +23,7 @@ class Video(object):
             if next_url:
                 page = requests.get(next_url)
             else:
-                page = requests.get(self.site)
+                page = requests.get(site_copy)
             tree = html.fromstring(page.content)
             links = tree.xpath(xpath)
             next_url = links[0]
@@ -55,6 +56,24 @@ class Video(object):
             # 3 video provider
             '//a[text()="@provider@"]/@href',
             #'//a[contains(text(),"@provider@")]/@href',
+            # 4 video mp4
+            "//div[contains(@id, 'video-content')]//video/@src"
+            # pandora
+            #"//video[contains(@id, 'qVideo')]/@src"
+        ]
+        providers = ["9TSU", "PAN"]
+        return self(site, xpaths, providers) 
+
+    @classmethod
+    def get_waraimasu(self):
+        site = 'http://waraimasu.blog40.fc2.com/?q=@title@'
+        # xpath schema
+        xpaths = [ 
+            # 2 TV show page
+            "//div[contains(@class,'ently_outline')]//div[contains(@class, 'readmore')]//a[contains(@onclick,'showMore')]/@href",
+            # 3 video provider
+            #'//a[text()="@provider@"]/@href',
+            '//a[contains(text(),"@provider@")]/@href',
             # 4 video mp4
             "//div[contains(@id, 'video-content')]//video/@src"
             # pandora
