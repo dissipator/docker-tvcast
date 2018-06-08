@@ -26,12 +26,15 @@ def apple():
 
 # /jp/tv_show/really
 @app.route('/tv/jp/<title>')
-def tv_jp__show(title):
+def tv_jp_show(title):
     if title == 'random':
         tv_title = service.get_random_tv_title()
     else:
         tv_title = service.get_tv_title(title.lower())
-    video_url = jp_video.parse_video_url(tv_title)
+    try:
+        video_url = jp_video.parse_video_url(tv_title)
+    except:
+        return '{"status":"fail", "error":%s, "message":"error parsing url for %s"}' %(str(e), str(tv_title))
     device.play_video(video_url)
     return '{"status":"ok", "tv_title":tv_title}'
 
