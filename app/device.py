@@ -15,6 +15,7 @@ class Device(object):
         if not self.cached_mc:
             self.chromecasts = pychromecast.get_chromecasts()
             cast = next(cc for cc in self.chromecasts if cc.device.friendly_name == self.device_name)
+            cast.wait()
             self.cached_mc = cast.media_controller
         return self.cached_mc
 

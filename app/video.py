@@ -1,5 +1,7 @@
 import json
 import requests
+import datetime
+import re
 from lxml import html
 
 class Video(object):
@@ -13,7 +15,7 @@ class Video(object):
 
     def parse_video_url(self, title):
         idx = 0
-        xpaths_copy = list(self.xpaths)
+        xpaths_copy = list(self.xpaths['video_url'])
         site_copy = self.site.replace("@title@", title)
         self.replace_title(xpaths_copy, title)
         self.replace_provider(xpaths_copy, self.providers[idx])
@@ -32,6 +34,24 @@ class Video(object):
         # if video link return 200 status
         # if validate fail call itself with idx = idx + 1
         return next_url
+
+
+    def get_date(self, title):
+        xpaths_copy = list(self.xpaths['video_date'])
+        site_copy = self.site.replace("@title@", title)
+        self.replace_title(xpaths_copy, title)
+
+        next_url = None
+        for xpath in xpaths_copy:
+            if next_url:
+                page = requests.get(next_url)
+            else:
+                page = requests.get(site_copy)
+            tree = html.fromstring(page.content)
+            links = tree.xpath(xpath)
+            next_url = links[0]
+        date = re.findall("[0-9]{1,2}月[0-9]{1,2}日", next_url)
+        return date
 
 
     def replace_title(self, links, title):
@@ -64,11 +84,13 @@ class Video(object):
         providers = ["9TSU", "PAN"]
         return self(site, xpaths, providers) 
 
+
     @classmethod
     def get_waraimasu(self):
         site = 'http://waraimasu.blog40.fc2.com/?q=@title@'
         # xpath schema
-        xpaths = [ 
+        xpaths = {}
+        xpaths['video_url'] = [ 
             # 2 TV show page
             "//div[contains(@class,'ently_outline')]//div[contains(@class, 'readmore')]//a[contains(@onclick,'showMore')]/@href",
             # 3 video provider
@@ -78,6 +100,9 @@ class Video(object):
             "//div[contains(@id, 'video-content')]//video/@src"
             # pandora
             #"//video[contains(@id, 'qVideo')]/@src"
+        ]
+        xpaths['video_date'] = [ 
+            "//div[contains(@class,'ently_outline')]//div[contains(@class, 'readmore')]//a[contains(@onclick,'showMore')]/text()"
         ]
         providers = ["9TSU", "PAN"]
         return self(site, xpaths, providers) 

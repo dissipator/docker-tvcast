@@ -46,6 +46,24 @@ def get_random_tv_title():
     return title
 
 
+def list_tv_status(video):
+    tv_status_list = {}
+    title_maps = dict(title_map())
+    for key, value in title_maps.items():
+        video_status = True
+        try:
+            video_url = video.parse_video_url(value)
+            if not video_url: 
+                raise Exception('Error video url not found')
+        except:
+            video_url = None
+            video_status = False
+        date  = video.get_date(value)
+        tv_status_list[key] = {"title": value, "status": video_status, "date": date,  "video_url": video_url}
+    return tv_status_list
+
+
+
 #def get_media_controller(device_name):
 #    if device_name not in cached_mc:
 #        cast = next(cc for cc in chromecasts if cc.device.friendly_name == device_name)

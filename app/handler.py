@@ -69,6 +69,12 @@ def list_tv():
     return json.dumps(title_list)
 
 
+@app.route('/tv/list/status')
+def list_tv_status():
+    tv_status = service.list_tv_status(jp_video)
+    return json.dumps(tv_status)
+
+
 # use by direct execute 
 if __name__=='__main__':
         #app.run(host= '192.168.3.103', port=5000)
