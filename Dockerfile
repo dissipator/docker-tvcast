@@ -4,6 +4,10 @@
 #     docker run -it --rm -p 8008:8008 -p 8009:8009 -p 1900:1900/udp -p 5353:5353/udp  --name flask local/flask bash
 #     docker run -it --rm --privileged --net="host" --name tvcast local/tvcast
 #     docker run -d --privileged --net="host" --name tvcast local/tvcast
+#     docker run -d --privileged --net="host" --name tvcast -v $PWD/app:/app local/tvcast
+#
+#     docker build -t local/tvcast .
+#     docker run -it --rm --privileged --net="host" --name tvcast -v $PWD/app:/app local/tvcast bash
 # Build:
 #     docker build -t local/flask .
 # Gunicorn HTTP Server
@@ -21,15 +25,39 @@ ENV LANGUAGE=en_US.UTF-8
 ENV LC_ALL=C.UTF-8 
 
 # Add Files
-#ADD container-files/mitmf /usr/bin/mitmf
+#ADD container-files/usr/bin /usr/bin
+ADD container-files/usr/bin/chromedriver /usr/bin/chromedriver
 ADD app /app
 
-#RUN apt-get update \
-#    && apt-get install -y \
-#            python-pip \
-#            vim 
+# install google chrome 
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list
 
-RUN pip install flask gunicorn pychromecast lxml pdbpp --no-cache-dir
+RUN apt-get update \
+    && apt-get install -y \
+            zip \
+            google-chrome-stable
+            #build-essential \
+            #libnss3 \
+            #libasound2 \
+            #qttools5-dev-tools
+            #python3-dev \
+            #libqt4-dev \
+            #python-qt4 \
+            #python-qt4-dev \
+            #x11-apps \
+            #xemacs21
+            #software-properties-common
+#            # chrome drive dependince
+#            libnss3-dev \
+#            libxi6 \
+#            libgconf-2-4 \
+#            chromium
+##            python-pip \
+##            vim 
+
+
+RUN pip install flask gunicorn pychromecast lxml pdbpp selenium --no-cache-dir
 
 WORKDIR /app
 
