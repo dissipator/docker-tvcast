@@ -56,7 +56,7 @@ def tv_one_piece(chapter):
 
 
 @app.route('/tv/bleach/<chapter>')
-def tv_one_piece(chapter):
+def tv_bleach(chapter):
     if chapter == 'random':
         pass
         #tv_title = service.get_random_tv_title()
