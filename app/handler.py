@@ -1,6 +1,6 @@
 from flask import Flask
 import service
-from video import Video
+from video_site import VideoSite
 from device import Device
 import json
 
@@ -10,7 +10,8 @@ application = app
 
 device_name = "XBR-55X850D"
 device = Device(device_name)
-jp_video = Video.get_waraimasu()
+jp_video = VideoSite.get_waraimasu()
+animate_video = VideoSite.get_99kubo()
 
 
 @app.route('/')
@@ -33,6 +34,36 @@ def tv_jp_show(title):
         tv_title = service.get_tv_title(title.lower())
     try:
         video_url = jp_video.parse_video_url(tv_title)
+    except:
+        return '{"status":"fail", "error":%s, "message":"error parsing url for %s"}' %(str(e), str(tv_title))
+    device.play_video(video_url)
+    return '{"status":"ok", "tv_title":tv_title}'
+
+
+@app.route('/tv/one-piece/<chapter>')
+def tv_one_piece(chapter):
+    if chapter == 'random':
+        pass
+        #tv_title = service.get_random_tv_title()
+    else:
+        tv_title = service.get_kubo_title('one piece')
+    try:
+        video_url = animate_video.parse_video_url(tv_title, chapter)
+    except:
+        return '{"status":"fail", "error":%s, "message":"error parsing url for %s"}' %(str(e), str(tv_title))
+    device.play_video(video_url)
+    return '{"status":"ok", "tv_title":tv_title}'
+
+
+@app.route('/tv/bleach/<chapter>')
+def tv_one_piece(chapter):
+    if chapter == 'random':
+        pass
+        #tv_title = service.get_random_tv_title()
+    else:
+        tv_title = service.get_kubo_title('bleach')
+    try:
+        video_url = animate_video.parse_video_url(tv_title, chapter)
     except:
         return '{"status":"fail", "error":%s, "message":"error parsing url for %s"}' %(str(e), str(tv_title))
     device.play_video(video_url)

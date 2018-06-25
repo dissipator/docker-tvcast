@@ -37,12 +37,13 @@ class VideoSite(object):
         for item in xpaths_copy:
             (key, xpath), = item.items()
             
+            current_url = next_url
             """ Get html content """
-            if next_url:
+            if current_url:
                 """ check if next_url contains domain """
-                if self.domain and str(next_url).startswith('/') and self.domain not in str(next_url):
-                    next_url = self.domain + next_url
-                page = self.webdriver.get_html(next_url)
+                if self.domain and str(current_url).startswith('/') and self.domain not in str(current_url):
+                    current_url = self.domain + current_url
+                page = self.webdriver.get_html(current_url)
             else:
                 page = self.webdriver.get_html(site_copy)
 

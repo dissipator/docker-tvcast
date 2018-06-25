@@ -47,6 +47,18 @@ def get_random_tv_title():
     return title
 
 
+def kubo_title_map():
+    return {
+        "one piece": "26351",
+        "bleach": "32800"
+    }
+
+
+def get_kubo_title(title):
+    title_maps = dict(kubo_title_map())
+    if title in title_maps:
+        return title_maps[title]
+
 
 def list_tv_status(video):
     # https://stackoverflow.com/questions/3288595/multiprocessing-how-to-use-pool-map-on-a-function-defined-in-a-class
