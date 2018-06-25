@@ -50,7 +50,8 @@ def get_random_tv_title():
 def kubo_title_map():
     return {
         "one piece": "26351",
-        "bleach": "32800"
+        "bleach": "32800",
+        "titan": "91998"
     }
 
 
