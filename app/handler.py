@@ -70,6 +70,21 @@ def tv_bleach(chapter):
     return '{"status":"ok", "tv_title":tv_title}'
 
 
+@app.route('/tv/titan/<chapter>')
+def tv_titan(chapter):
+    if chapter == 'random':
+        pass
+        #tv_title = service.get_random_tv_title()
+    else:
+        tv_title = service.get_kubo_title('titan')
+    try:
+        video_url = animate_video.parse_video_url(tv_title, chapter)
+    except:
+        return '{"status":"fail", "error":%s, "message":"error parsing url for %s"}' %(str(e), str(tv_title))
+    device.play_video(video_url)
+    return '{"status":"ok", "tv_title":tv_title}'
+
+
 @app.route('/tv/stop')
 def stop_tv():
     device.stop_video()
