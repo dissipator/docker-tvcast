@@ -79,9 +79,11 @@ class Waraimasu(VideoSite):
         tv_status_list = []
         for idx, title in enumerate(titles):
             tv_status_list.append({"title": title, "label": label[idx], "url": video_urls[idx]})
-
-
         #tv_status_list = zip(*[label, titles, video_urls])
+
+        # write to tmp file, and time stamp, only refresh if time - now > 6 hrs
+
+        
         pool.close()
         pool.join()
         #return list(tv_status_list)

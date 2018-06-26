@@ -37,7 +37,6 @@ def list_tv():
 @app.route('/tv/list/status')
 def list_tv_status():
     tv_status = tv_site.list_tv_status()
-    #tv_status = ["a","b","c"]
     return render_template('tv_status.html', tv_status=tv_status)
     #return json.dumps(tv_status)
 

@@ -17,7 +17,7 @@ def cast_tv(device, site_video, title, chapter = None):
         else:
             tv_title = site_video.get_title(title.lower())
         try:
-            video_url = site_video.parse_video_url(tv_title)
+            video_url = site_video.parse_video_url(tv_title, chapter)
         except:
             return '{"status":"fail", "error":%s, "message":"error parsing url for %s"}' %(str(e), str(tv_title))
         device.play_video(video_url)
