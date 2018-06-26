@@ -60,7 +60,6 @@ class VideoSite(object):
 
             if not next_url:
                 return None
-
         # todo:
         # validate mp4 video link
         # if video link return 200 status
@@ -103,35 +102,4 @@ class VideoSite(object):
         for idx, item in enumerate(links):
             (key, path), = item.items()
             links[idx] = {key: path.replace("@chapter@", chapter)}
-
-
-    @classmethod
-    def get_waraimasu(self):
-        site = 'http://waraimasu.blog40.fc2.com/?q=@title@'
-        # xpath schema
-        xpaths = [
-            {"date": "//div[contains(@class,'ently_outline')]//div[contains(@class, 'readmore')]//a[contains(@onclick,'showMore')]/text()"},
-            # 2 TV show page
-            {"link": "//div[contains(@class,'ently_outline')]//div[contains(@class, 'readmore')]//a[contains(@onclick,'showMore')]/@href"},
-            # 3 video provider
-            {"link":'//a[contains(text(),"@provider@")]/@href'},
-            # 4 video mp4
-            {"link":"//div[contains(@id, 'video-content')]//video/@src"}
-        ]
-        providers = ["9TSU", "PAN"]
-        return self(site, xpaths, providers) 
-
-
-    @classmethod
-    def get_99kubo(self):
-        # http://www.99tw.net/redirect?mode=xplay&id={vid}&pid={chapter}
-        site = 'http://www.99tw.net/redirect?mode=xplay&id=@title@&pid=@chapter@'
-        # "480P.*src\\:\\s?\\'(.*)\\'"
-        xpaths = [
-            {"regex": r'480P.*src\:\s?\'(.*)\''}
-        ]
-        providers = None
-        domain = 'http://www.99kubo.tv'
-        return self(site, xpaths, providers, domain) 
-
 

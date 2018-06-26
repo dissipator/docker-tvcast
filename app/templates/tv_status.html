@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+
+        <h1> TV show status</h1>
+        <div id="status-list">
+            <table class="table table-striped">
+                <tr>
+                    <th> Title </th>
+                    <th> Label </th>
+                    <th> Url </th>
+                </tr>
+            {% for item in tv_status %}
+                <tr>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.label }}</td>
+                    <td>{{ item.url }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+    </body>
+</html>
