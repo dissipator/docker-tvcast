@@ -93,7 +93,7 @@ class Waraimasu(VideoSite):
 
         tv_status_list = []
         for idx, title in enumerate(titles):
-            tv_status_list.append({"title": title, "label": label[idx], "url": video_urls[idx]})
+            tv_status_list.append({"title": title, "label": label[idx], "status": "True" if video_urls[idx] else "False", "url": video_urls[idx]})
         #tv_status_list = zip(*[label, titles, video_urls])
 
         pool.close()

@@ -20,7 +20,8 @@
                 <tr>
                     <td>{{ item.title }}</td>
                     <td>{{ item.label }}</td>
-                    <td>{{ item.url }}</td>
+                    <td>{{ item.status }}</td>
+                    <td><a href="{{ item.url }}" target="_blank"> goto video </a></td>
                 </tr>
             {% endfor %}
             </table>
