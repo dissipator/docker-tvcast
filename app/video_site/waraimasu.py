@@ -1,5 +1,6 @@
 import json
 import datetime
+import time
 import random
 from video_site.video_site import VideoSite
 from webdriver.default import DefaultWebDriver
@@ -70,6 +71,20 @@ class Waraimasu(VideoSite):
 
 
     def list_tv_status(self):
+        store_key = 'waraimasu_status'
+        status_cache = None
+        # cache for 6 hours
+        cache_expire = 21600 
+        try:
+            status_cache = self.fetch_info(store_key)
+            if (int(time.time()) - status_cache['time']) > cache_expire :
+                status_cache = None
+        except FileNotFoundError as e:
+            pass
+
+        if status_cache:
+            return status_cache["body"]
+
         pool = Pool()
         title_maps = dict(self.title_map())
         label = [key for key in title_maps]
@@ -81,10 +96,8 @@ class Waraimasu(VideoSite):
             tv_status_list.append({"title": title, "label": label[idx], "url": video_urls[idx]})
         #tv_status_list = zip(*[label, titles, video_urls])
 
-        # write to tmp file, and time stamp, only refresh if time - now > 6 hrs
-
-        
         pool.close()
         pool.join()
-        #return list(tv_status_list)
+        # write to tmp file, and time stamp, only refresh if time - now > 6 hrs
+        self.save_info(store_key, {"time": int(time.time()), "body": tv_status_list})
         return tv_status_list

@@ -2,6 +2,7 @@ import json
 import requests
 import datetime
 import re
+import json
 from lxml import html
 
 import urllib.request
@@ -16,6 +17,7 @@ class VideoSite(object):
         self.domain = domain
         self.title = None
         self.webdriver = DefaultWebDriver() if not webdriver else webdriver
+        self.temp_path = '/tmp/'
 
 
     def parse_video_url(self, title=None, chapter=None):
@@ -83,6 +85,19 @@ class VideoSite(object):
             next_url = links[0]
         date = re.findall("[0-9]{1,2}月[0-9]{1,2}日", next_url)
         return date
+
+
+    def save_info(self, key, data):
+        fp = open(self.temp_path + key, 'w')
+        fp.write(json.dumps(data))
+        fp.close()
+
+
+    def fetch_info(self, key):
+        fp = open(self.temp_path + key, 'r')
+        data = fp.read()
+        fp.close()
+        return json.loads(data)
 
 
     def replace_title(self, links, title):
