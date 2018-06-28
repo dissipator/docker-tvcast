@@ -10,20 +10,28 @@
 
         <h1> TV show status</h1>
         <div id="status-list">
-            <table class="table table-striped">
-                <tr>
-                    <th> Title </th>
-                    <th> Label </th>
-                    <th> Status </th>
-                    <th> Url </th>
-                </tr>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th> Title </th>
+                        <th> Label </th>
+                        <th> Status </th>
+                        <th> Url </th>
+                    </tr>
+                </thead>
             {% for item in tv_status %}
-                <tr>
-                    <td>{{ item.title }}</td>
-                    <td>{{ item.label }}</td>
-                    <td>{{ item.status }}</td>
-                    <td><a href="{{ item.url }}" target="_blank"> goto video </a></td>
-                </tr>
+                <tbody class="table-striped">
+                    {% if item.status == 'False'}
+                    <tr class="table-danger">
+                    {% else %}
+                    <tr>
+                    {% endif %}
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.label }}</td>
+                        <td>{{ item.status }}</td>
+                        <td><a href="{{ item.url }}" target="_blank"> goto video </a></td>
+                    </tr>
+                </tbody>
             {% endfor %}
             </table>
     </body>
