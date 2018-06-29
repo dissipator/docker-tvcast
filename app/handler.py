@@ -42,7 +42,7 @@ def list_tv_status():
 
 
 @app.route('/tv/list/status/clear')
-def list_tv_status():
+def clear_tv_status():
     tv_status = tv_site.clear_status_cache()
     return '{"status":"ok", "message":"status cache is deleted"}'
 
