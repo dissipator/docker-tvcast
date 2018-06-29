@@ -2,37 +2,50 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap-flex.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script>
+            function castAction(title) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", "http://www.alfredkan.com:5000/tv/jp/"+title, true);
+                xhttp.setRequestHeader("Content-type", "application/json");
+                xhttp.send();
+                var response = JSON.parse(xhttp.responseText);
+            }
+        </script>
     </head>
 
     <body>
-
-        <h1> TV show status</h1>
-        <div id="status-list">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th> Title </th>
-                        <th> Label </th>
-                        <th> Status </th>
-                        <th> Url </th>
-                    </tr>
-                </thead>
-            {% for item in tv_status %}
-                <tbody class="table-striped">
-                    {% if item.status == 'False' %}
-                    <tr class="table-danger">
-                    {% else %}
-                    <tr>
-                    {% endif %}
-                        <td>{{ item.title }}</td>
-                        <td>{{ item.label }}</td>
-                        <td>{{ item.status }}</td>
-                        <td><a href="{{ item.url }}" target="_blank"> goto video </a></td>
-                    </tr>
-                </tbody>
-            {% endfor %}
-            </table>
+        <div class="container">
+            <h1> TV show status</h1>
+            <div id="status-list">
+                <table class="table table-hover">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th> Title </th>
+                            <th> Label </th>
+                            <th> Status </th>
+                            <th> Url </th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-striped">
+                    {% for item in tv_status %}
+                        {% if item.status == 'False' %}
+                        <tr class="table-danger">
+                        {% else %}
+                        <tr>
+                        {% endif %}
+                            <td>{{ item.title }}</td>
+                            <td>{{ item.label }}</td>
+                            <td>{{ item.status }}</td>
+                            <td><a href="{{ item.url }}" target="_blank"> goto video </a></td>
+                            <td><button type="submit" onclick="castAction({{ item.label }})">Cast</button></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </body>
 </html>
