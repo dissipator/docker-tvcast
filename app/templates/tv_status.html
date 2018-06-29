@@ -13,12 +13,19 @@
                 xhttp.send();
                 var response = JSON.parse(xhttp.responseText);
             }
+            function clearCache() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", "http://www.alfredkan.com:5000/tv/list/status/clear", true);
+                xhttp.setRequestHeader("Content-type", "application/json");
+                xhttp.send();
+            }
         </script>
     </head>
 
     <body>
         <div class="container">
-            <h1> TV show status</h1>
+            <h1> TV show status</h1> 
+            <span> <button type="submit" onclick="clearCache()">Clear Cache</button> </span>
             <div id="status-list">
                 <table class="table table-hover">
                     <thead class="thead-inverse">

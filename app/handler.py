@@ -41,6 +41,12 @@ def list_tv_status():
     #return json.dumps(tv_status)
 
 
+@app.route('/tv/list/status/clear')
+def list_tv_status():
+    tv_status = tv_site.clear_status_cache()
+    return '{"status":"ok", "message":"status cache is deleted"}'
+
+
 """ Animation """
 @app.route('/tv/one-piece/<chapter>')
 def tv_one_piece(chapter):

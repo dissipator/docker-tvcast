@@ -70,8 +70,12 @@ class Waraimasu(VideoSite):
         return title
 
 
+    def get_key(self):
+        return 'waraimasu_status'
+
+
     def list_tv_status(self):
-        store_key = 'waraimasu_status'
+        store_key = self.get_key()
         status_cache = None
         # cache for 6 hours
         cache_expire = 21600 
@@ -101,3 +105,8 @@ class Waraimasu(VideoSite):
         # write to tmp file, and time stamp, only refresh if time - now > 6 hrs
         self.save_info(store_key, {"time": int(time.time()), "body": tv_status_list})
         return tv_status_list
+
+
+    def clear_status_cache(self):
+        store_key = self.get_key()
+        self.delete_info(store_key)

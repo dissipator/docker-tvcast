@@ -2,6 +2,7 @@ import json
 import requests
 import datetime
 import re
+import os
 import json
 from lxml import html
 
@@ -98,6 +99,10 @@ class VideoSite(object):
         data = fp.read()
         fp.close()
         return json.loads(data)
+
+
+    def delete_info(self, key):
+        os.remove(self.temp_path + key)
 
 
     def replace_title(self, links, title):
