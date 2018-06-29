@@ -8,7 +8,7 @@
         <script>
             function castAction(title) {
                 var xhttp = new XMLHttpRequest();
-                xhttp.open("GET", "http://www.alfredkan.com:5000/tv/jp/"+title, true);
+                xhttp.open("GET", "http://www.alfredkan.com:5000/tv/jp/" + title, true);
                 xhttp.setRequestHeader("Content-type", "application/json");
                 xhttp.send();
                 var response = JSON.parse(xhttp.responseText);
@@ -41,7 +41,7 @@
                             <td>{{ item.label }}</td>
                             <td>{{ item.status }}</td>
                             <td><a href="{{ item.url }}" target="_blank"> goto video </a></td>
-                            <td><button type="submit" onclick="castAction({{ item.label }})">Cast</button></td>
+                            <td><button type="submit" onclick="castAction('{{ item.label }}')">Cast</button></td>
                         </tr>
                     {% endfor %}
                     </tbody>
