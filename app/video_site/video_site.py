@@ -44,8 +44,9 @@ class VideoSite(object):
             """ Get html content """
             if current_url:
                 """ check if next_url contains domain """
-                if self.domain and str(current_url).startswith('/') and self.domain not in str(current_url):
-                    current_url = self.domain + current_url
+                #if self.domain and str(current_url).startswith('/') and self.domain not in str(current_url):
+                if self.domain and (not str(current_url).startswith('http') and self.domain not in str(current_url)):
+                    current_url = self.domain + '/' + current_url
                 page = self.webdriver.get_html(current_url)
             else:
                 page = self.webdriver.get_html(site_copy)

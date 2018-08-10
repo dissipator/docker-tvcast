@@ -10,35 +10,56 @@ from multiprocessing import Pool
 class Waraimasu(VideoSite):
 
     def __init__(self):
-        site = 'http://waraimasu.blog40.fc2.com/?q=@title@'
+        #site = 'http://waraimasu.blog40.fc2.com/?q=@title@'
+        site = 'http://waraimasu.blog40.fc2.com/blog-category-@title@.html'
         xpaths = self.get_xpaths()
         providers = ["9TSU", "PAN"]
-        domain = None
+        domain = 'http://waraimasu.blog40.fc2.com'
         webdriver = DefaultWebDriver()
         super().__init__(site, xpaths, providers, domain, webdriver)
 
 
     @classmethod
     def title_map(cls):
+        #return {
+        #    "really": "ホンマでっか!?TV",
+        #    "going": "イッテＱ",
+        #    "7": "しゃべくり007",
+        #    "sport": "炎の体育会TV",
+        #    "class": "世界一受けたい授業",
+        #    "look": "世界まる見えテレビ特捜部",
+        #    "lawyer": "行列のできる法律相談所",
+        #    "talk": "深イイ話",
+        #    "karaoke": "THEカラオケ★バトル",
+        #    "music": "ミュージックステーション",
+        #    "bingo": "AKBINGO",
+        #    "gold": "金スマ",
+        #    "london": "ロンドンハーツ",
+        #    "monitoring": "モニタリング",
+        #    "news": "ザ!世界仰天ニュース",
+        #    "seminar": "有吉ゼミ",
+        #    "girl": "幸せ!ボンビーガール",
+        #    "tonight": "今夜くらべてみました"
+        #}
         return {
-            "really": "ホンマでっか!?TV",
-            "going": "イッテＱ",
-            "7": "しゃべくり007",
-            "sport": "炎の体育会TV",
-            "class": "世界一受けたい授業",
-            "look": "世界まる見えテレビ特捜部",
-            "lawyer": "行列のできる法律相談所",
-            "talk": "深イイ話",
-            "karaoke": "THEカラオケ★バトル",
-            "music": "ミュージックステーション",
-            "bingo": "AKBINGO",
-            "gold": "金スマ",
-            "london": "ロンドンハーツ",
-            "monitoring": "モニタリング",
-            "news": "ザ!世界仰天ニュース",
-            "seminar": "有吉ゼミ",
-            "girl": "幸せ!ボンビーガール",
-            "tonight": "今夜くらべてみました"
+            "really": "82",
+            "going": "22",
+            "7": "74",
+            "sport": "169",
+            "class": "329",
+            "look": "344",
+            "lawyer": "194",
+            "talk": "241",
+            "karaoke": "557",
+            "music": "418",
+            "bingo": "293",
+            "gold": "303",
+            "london": "37",
+            "monitoring": "232",
+            "news": "331",
+            "seminar": "353",
+            "girl": "286",
+            "tonight": "228"
         }
 
 
@@ -53,9 +74,10 @@ class Waraimasu(VideoSite):
     def get_xpaths(cls):
         # xpath schema
         xpaths = [
-            {"date": "//div[contains(@class,'ently_outline')]//div[contains(@class, 'readmore')]//a[contains(@onclick,'showMore')]/text()"},
+            #{"date": "//div[contains(@class,'ently_outline')]//div[contains(@class, 'readmore')]//a[contains(@onclick,'showMore')]/text()"},
             # 2 TV show page
-            {"link": "//div[contains(@class,'ently_outline')]//div[contains(@class, 'readmore')]//a[contains(@onclick,'showMore')]/@href"},
+            #{"link": "//div[contains(@class,'ently_outline')]//div[contains(@class, 'readmore')]//a[contains(@onclick,'showMore')]/@href"},
+            {"link": "//div[contains(@id,'searchmain')]//ul//li//a/@href"},
             # 3 video provider
             {"link":'//a[contains(text(),"@provider@")]/@href'},
             # 4 video mp4
