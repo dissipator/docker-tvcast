@@ -77,7 +77,8 @@ class Waraimasu(VideoSite):
             #{"date": "//div[contains(@class,'ently_outline')]//div[contains(@class, 'readmore')]//a[contains(@onclick,'showMore')]/text()"},
             # 2 TV show page
             #{"link": "//div[contains(@class,'ently_outline')]//div[contains(@class, 'readmore')]//a[contains(@onclick,'showMore')]/@href"},
-            {"link": "//div[contains(@id,'searchmain')]//ul//li//a/@href"},
+            #{"link": "//div[contains(@id,'searchmain')]//ul//li//a/@href"},
+            {"link": "//div[contains(@class,'readmore')]//p//a/@href"},
             # 3 video provider
             {"link":'//a[contains(text(),"@provider@")]/@href'},
             # 4 video mp4
