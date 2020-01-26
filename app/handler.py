@@ -9,7 +9,8 @@ from video_site.waraimasu import Waraimasu
 app = Flask(__name__)
 application = app
 
-device_name = "XBR-55X850D"
+# device_name = "XBR-55X850D"
+device_name = "Living Room TV"
 device = Device(device_name)
 tv_site = Waraimasu()
 animate_site = Kubo()
