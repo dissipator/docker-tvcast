@@ -39,7 +39,22 @@ class Waraimasu(VideoSite):
         #    "news": "ザ!世界仰天ニュース",
         #    "seminar": "有吉ゼミ",
         #    "girl": "幸せ!ボンビーガール",
-        #    "tonight": "今夜くらべてみました"
+        #    "tonight": "今夜くらべてみました",
+        #    # New #
+        #    "regret": "有吉反省会",
+        #    "deep": "深イイ話",
+        #    "news": "池上彰のニュースそうだったのか",
+        #    "quize": "Qさま",
+        #    "laugh": "笑ってコラえて",
+        #    "world": "世界仰天ニュース",
+        #    "neputune": "ネプリーグ",
+        #    "surprise": "世界が驚いたニッポンスゴ〜イデスネ",
+        #    "ear": "林先生の初耳学",
+        #    "unbelivable": "奇跡体験アンビリバボー",
+        #    "do": "嵐にしやがれ",
+        #    "versus": "VS嵐",
+        #    "song": "utage",
+        #    "medical": "みんなの家庭の医学",
         #}
         return {
             "really": "82",
@@ -59,7 +74,21 @@ class Waraimasu(VideoSite):
             "news": "331",
             "seminar": "353",
             "girl": "286",
-            "tonight": "228"
+            "tonight": "228",
+            "regret": "274",
+            "deep": "241",
+            "news": "687",
+            "quize": "234",
+            "laugh": "345",
+            "world": "331",
+            "neputune": "151",
+            "surprise": "607",
+            "ear": "693",
+            "unbelivable": "266",
+            "do": "318",
+            "versus": "317",
+            "song": "521",
+            "medical": "453"
         }
 
 
